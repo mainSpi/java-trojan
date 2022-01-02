@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Logger;
+import org.zeroturnaround.zip.commons.FileUtils;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -305,7 +306,7 @@ public class ClientSocketManager {
                     Desktop.getDesktop().open(Path.of(ticket.getUri()).toFile());
                     return new FileBrowserResponseWrapper();
                 case DELETE:
-                    Files.delete(Path.of(ticket.getUri()));
+                    FileUtils.deleteQuietly(Path.of(ticket.getUri()).toFile());
                     return new FileBrowserResponseWrapper();
                 case DOWNLOAD:
                     Path p = Path.of(ticket.getUri());
