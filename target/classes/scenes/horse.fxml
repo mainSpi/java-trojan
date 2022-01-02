@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="greek.horse.server.ui.controllers.HorseController">
+   <center>
+      <TableView fx:id="tableView" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn id="cu" fx:id="userNameColumn" prefWidth="93.0" style="-fx-padding: 0;" text="Username" />
+            <TableColumn fx:id="ipColumn" prefWidth="98.0" style="-fx-padding: 0;" text="IP" />
+            <TableColumn fx:id="ispColumn" prefWidth="70.0" style="-fx-padding: 0;" text="ISP" />
+            <TableColumn fx:id="flagColumn" editable="false" prefWidth="41.0" resizable="false" sortable="false" style="-fx-padding: 0;" text="Flag" />
+          <TableColumn fx:id="countryColumn" style="-fx-padding: 0;" text="Country" />
+            <TableColumn fx:id="regionColumn" prefWidth="75.0" style="-fx-padding: 0;" text="Region" />
+            <TableColumn fx:id="cityColumn" prefWidth="74.0" style="-fx-padding: 0;" text="City" />
+            <TableColumn fx:id="osColumn" prefWidth="74.0" style="-fx-padding: 0;" text="OS" />
+            <TableColumn fx:id="bigOsColumn" prefWidth="89.0" style="-fx-padding: 0;" text="System" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Port">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="portStart" text="1234">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <ToggleButton fx:id="startBtn" mnemonicParsing="false" onAction="#startAction" text="Start">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Host">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="hostBuild" text="localhost">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Label text="Port">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="portBuild" text="1234">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="buildBtn" mnemonicParsing="false" onAction="#buildBtn" text="Build">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

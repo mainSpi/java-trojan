@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="greek.horse.server.ui.controllers.FileBrowserController">
+   <left>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <TableView fx:id="drivesTable" prefHeight="400.0" prefWidth="237.0">
+              <columns>
+                  <TableColumn fx:id="iconDrivesColumn" prefWidth="35.0" resizable="false" sortable="false" text="Icon" />
+                <TableColumn fx:id="nameDriveColumn" prefWidth="121.0" resizable="false" sortable="false" text="Name" />
+                  <TableColumn fx:id="sizeDrivesColumn" prefWidth="78.0" resizable="false" sortable="false" text="Size" />
+              </columns>
+            </TableView>
+         </center>
+         <bottom>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="32.0" prefWidth="237.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#gotoHUB" text="HUB">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="7.0" prefWidth="237.0">
+                     <children>
+                        <Label fx:id="statusLabel" contentDisplay="CENTER">
+                           <HBox.margin>
+                              <Insets bottom="3.0" right="10.0" top="2.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </bottom>
+      </BorderPane>
+   </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <TableView fx:id="listTable" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="iconListColumn" prefWidth="35.0" resizable="false" sortable="false" text="Icon" />
+                <TableColumn fx:id="nameListColumn" prefWidth="280.0" resizable="false" sortable="false" text="Name" />
+                  <TableColumn fx:id="sizeListColumn" prefWidth="69.0" resizable="false" sortable="false" text="Size" />
+              </columns>
+            </TableView>
+         </center>
+         <top>
+            <TextField fx:id="pathTextField" editable="false" focusTraversable="false" onKeyPressed="#enterDetection" prefHeight="25.0" prefWidth="103.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>
