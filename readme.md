@@ -5,7 +5,7 @@ Fully Java powered trojan. Monitoring and communication software.
 This project is for education purposes **ONLY**. If you are looking for spyware software, this is not it. Any other non-education use is disapproved.
 
 ## Latest build
-Take a look [at it](/releases/latest)
+Check it [here](/releases/latest)
 
 ## Features
 
