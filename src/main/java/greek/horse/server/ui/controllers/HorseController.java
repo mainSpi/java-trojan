@@ -115,13 +115,15 @@ public class HorseController {
 
     private void startTable() {
         ObservableList<TroyPlebe> plebeObservableList = this.troyServer.getPlebes();
-        for (int i = 0; i < 10; i++) {
-            tableView.getItems().add(new NetInfoTable(new NetInfo("Robert", OS.WINDOWS, "Windows 10", "DESKTOP-DGSDF", "192.168.0.1", "200.98.134.27", "Brazil", "Sao Paulo", "Sao Paulo", "America/Sao_Paulo", "Universo Online S.A.", "Universo Online S.A.", "AS7162 Universo Online S.A."), new TroyPlebe("skibidi")));
-            tableView.getItems().add(new NetInfoTable(new NetInfo("Lorem", OS.UNIX, "Fedora 35", "SERVER-WSJDN", "192.168.43.1", "104.244.72.248", "Luxembourg", "Mersch", "Roost", "Europe/Luxembourg", "FranTech Solutions", "BuyVM", "AS53667 FranTech Solutions"), new TroyPlebe("skibidi")));
-            tableView.getItems().add(new NetInfoTable(new NetInfo("Yuri", OS.MAC, "MacOs X", "DESKTOP-WSJDN", "192.168.13.1", "207.188.139.168", "Spain", "Extremadura", "Badajoz", "Europe/Madrid", "Xtra Telecom S.A", "Xtra Telecom S.A", "AS15704 XTRA TELECOM S.A."), new TroyPlebe("skibidi")));
-            tableView.getItems().add(new NetInfoTable(new NetInfo("Jonah", OS.UNIX, "Mint 20.2", "SERVER-WSJDN", "192.168.1.1", "46.29.248.238", "Sweden", "Stockholm County", "Stockholm", "Europe/Stockholm", "Inter Connects Inc", "Sweden", "AS57858 Inter Connects Inc"), new TroyPlebe("skibidi")));
-            tableView.getItems().add(new NetInfoTable(new NetInfo("Gabriel", OS.UNKNOWN, "Temple OS 5.03", "DESKTOP-WSJDN", "192.168.15.1", "45.137.184.31", "Netherlands", "North Holland", "Amsterdam", "Europe/Amsterdam", "NL-MOTP", "", "AS41047 Bart Vrancken trading as MLaB"), new TroyPlebe("skibidi")));
-        }
+        
+        // for demo-ing app
+//        for (int i = 0; i < 10; i++) {
+//            tableView.getItems().add(new NetInfoTable(new NetInfo("Robert", OS.WINDOWS, "Windows 10", "DESKTOP-DGSDF", "192.168.0.1", "200.98.134.27", "Brazil", "Sao Paulo", "Sao Paulo", "America/Sao_Paulo", "Universo Online S.A.", "Universo Online S.A.", "AS7162 Universo Online S.A."), new TroyPlebe("skibidi")));
+//            tableView.getItems().add(new NetInfoTable(new NetInfo("Lorem", OS.UNIX, "Fedora 35", "SERVER-WSJDN", "192.168.43.1", "104.244.72.248", "Luxembourg", "Mersch", "Roost", "Europe/Luxembourg", "FranTech Solutions", "BuyVM", "AS53667 FranTech Solutions"), new TroyPlebe("skibidi")));
+//            tableView.getItems().add(new NetInfoTable(new NetInfo("Yuri", OS.MAC, "MacOs X", "DESKTOP-WSJDN", "192.168.13.1", "207.188.139.168", "Spain", "Extremadura", "Badajoz", "Europe/Madrid", "Xtra Telecom S.A", "Xtra Telecom S.A", "AS15704 XTRA TELECOM S.A."), new TroyPlebe("skibidi")));
+//            tableView.getItems().add(new NetInfoTable(new NetInfo("Jonah", OS.UNIX, "Mint 20.2", "SERVER-WSJDN", "192.168.1.1", "46.29.248.238", "Sweden", "Stockholm County", "Stockholm", "Europe/Stockholm", "Inter Connects Inc", "Sweden", "AS57858 Inter Connects Inc"), new TroyPlebe("skibidi")));
+//            tableView.getItems().add(new NetInfoTable(new NetInfo("Gabriel", OS.UNKNOWN, "Temple OS 5.03", "DESKTOP-WSJDN", "192.168.15.1", "45.137.184.31", "Netherlands", "North Holland", "Amsterdam", "Europe/Amsterdam", "NL-MOTP", "", "AS41047 Bart Vrancken trading as MLaB"), new TroyPlebe("skibidi")));
+//        }
 
         plebeObservableList.addListener((ListChangeListener<TroyPlebe>) lis -> {
             while (lis.next()) {

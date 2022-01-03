@@ -66,7 +66,7 @@ Take a look [at it](/releases/latest)
 
 - Remote terminal access
 - Send commands, receive responses
-- <figcaption align = "left">platform dependency</figcaption>
+- <figcaption align = "left">Platform dependency</figcaption>
 
   ![terminal dependency](demo/plataformDependency.png)
 
@@ -78,7 +78,7 @@ Take a look [at it](/releases/latest)
 - Server classes removal from jar
 - Useless files (images, .fxml) removal from jar
 - Concurrent building in background
-- <figcaption align = "left"><b>only works when running from jar</b></figcaption>
+- <figcaption align = "left"><b>Only works when running from jar</b></figcaption>
   
   ![error](demo/buildError.png)
 
