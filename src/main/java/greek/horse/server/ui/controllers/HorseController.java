@@ -66,7 +66,6 @@ public class HorseController {
         } else {
             turnOn(b);
         }
-
     }
 
     private void turnOff(ToggleButton b) {
@@ -115,7 +114,7 @@ public class HorseController {
 
     private void startTable() {
         ObservableList<TroyPlebe> plebeObservableList = this.troyServer.getPlebes();
-        
+
         // for demo-ing app
 //        for (int i = 0; i < 10; i++) {
 //            tableView.getItems().add(new NetInfoTable(new NetInfo("Robert", OS.WINDOWS, "Windows 10", "DESKTOP-DGSDF", "192.168.0.1", "200.98.134.27", "Brazil", "Sao Paulo", "Sao Paulo", "America/Sao_Paulo", "Universo Online S.A.", "Universo Online S.A.", "AS7162 Universo Online S.A."), new TroyPlebe("skibidi")));

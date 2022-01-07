@@ -88,4 +88,8 @@ Check the lastest build [here](/releases/latest)
 - A bit [platform dependent](https://stackoverflow.com/a/14297352/10421315)
 
 
+## Resources
 
+- [JavaFx](https://www.youtube.com/watch?v=BHj6zbH3inI&list=PLfu_Bpi_zcDNYL6171Op3S1ABtuyFV7Nr)
+- [Java Sockets](https://cursos.alura.com.br/course/threads-java-1)
+- [Java, in general](https://cursos.alura.com.br/formacao-java)
