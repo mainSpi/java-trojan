@@ -124,7 +124,7 @@ public class MonitorDesktopTask implements Runnable {
         double w = controller.getStage().getWidth() - 50;
         double h = controller.getStage().getHeight() - 70;
 
-        request = plebe.getScreenCapture(new MonitorDesktopWrapper(w, h, controller.isCompressed(), 0));
+        request = plebe.startScreenCapture(new MonitorDesktopWrapper(w, h, controller.isCompressed(), 0));
 
         ObservableList<Object> observableList = request.getObservableReceivedObjs();
 
