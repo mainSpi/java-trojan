@@ -23,9 +23,10 @@ public class NetInfo implements Serializable {
     private final String isp;
     private final String org;
     private final String as;
+    private final boolean headless;
 
 
-    public NetInfo(String userName, OS os, String bigOs, String hostName, String localIP, String externalIP, String country, String region, String city, String timeZone, String isp, String org, String as) {
+    public NetInfo(String userName, OS os, String bigOs, String hostName, String localIP, String externalIP, String country, String region, String city, String timeZone, String isp, String org, String as, boolean headless) {
         this.userName = userName;
         this.os = os;
         this.bigOs = bigOs;
@@ -39,10 +40,10 @@ public class NetInfo implements Serializable {
         this.isp = isp;
         this.org = org;
         this.as = as;
-
+        this.headless = headless;
     }
 
-    public NetInfo(InetAddress inet, JsonObject json) throws IOException {
+    public NetInfo(InetAddress inet, JsonObject json, boolean headless) throws IOException {
 
         if (!json.getString("status").contains("success")){
             throw new IOException("Status returner false: "+json.getString("status"));
@@ -59,6 +60,7 @@ public class NetInfo implements Serializable {
             os = OS.UNKNOWN;
         }
 
+        this.headless = headless;
         this.bigOs = System.getProperty("os.name");
 
         this.userName = SystemUtils.getUserName();
@@ -145,6 +147,10 @@ public class NetInfo implements Serializable {
 
     public String getBigOs() {
         return bigOs;
+    }
+
+    public boolean isHeadless() {
+        return headless;
     }
 
     public String getTitle(){

@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="greek.horse.server.ui.controllers.HorseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="greek.horse.server.ui.controllers.HorseController">
    <center>
-      <TableView fx:id="tableView" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" prefHeight="320.0" prefWidth="765.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn id="cu" fx:id="userNameColumn" prefWidth="93.0" style="-fx-padding: 0;" text="Username" />
             <TableColumn fx:id="ipColumn" prefWidth="98.0" style="-fx-padding: 0;" text="IP" />
@@ -24,6 +24,7 @@
             <TableColumn fx:id="cityColumn" prefWidth="74.0" style="-fx-padding: 0;" text="City" />
             <TableColumn fx:id="osColumn" prefWidth="74.0" style="-fx-padding: 0;" text="OS" />
             <TableColumn fx:id="bigOsColumn" prefWidth="89.0" style="-fx-padding: 0;" text="System" />
+            <TableColumn fx:id="headlessColumn" prefWidth="67.0" style="-fx-padding: 0;" text="Headless" />
         </columns>
       </TableView>
    </center>

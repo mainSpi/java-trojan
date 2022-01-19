@@ -4,10 +4,14 @@ import greek.horse.server.troyStructure.NetInfoTable;
 import greek.horse.server.ui.ChatApp;
 import greek.horse.server.ui.controllers.HorseController;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
+
+import javax.swing.event.DocumentEvent;
 
 public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableRow<NetInfoTable>> {
     private final HorseController controller;
@@ -38,7 +42,7 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
 
 
         MenuItem disconnect = new MenuItem("Disconnect", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("disconnect", 0.07), null)));
-        MenuItem stop = new MenuItem("Stop",new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("stop", 0.07), null)));
+        MenuItem stop = new MenuItem("Stop", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("stop", 0.07), null)));
         Menu manageClient = new Menu("Manage Client", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("client", 0.07), null)));
         manageClient.getItems().addAll(disconnect, stop);
 
@@ -62,7 +66,7 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
             this.controller.contextStop(row);
         });
 
-        chat.setOnAction(event ->{
+        chat.setOnAction(event -> {
             this.controller.contextChat(row);
         });
 
@@ -77,6 +81,24 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
         data.setOnAction(event -> {
             this.controller.contextFullData(row);
         });
+
+        // sort of one time event
+        EventHandler<ContextMenuEvent> handler = new EventHandler<>() {
+            @Override
+            public void handle(ContextMenuEvent contextMenuEvent) {
+                NetInfoTable item = row.getItem();
+                if (item != null) {
+                    if (item.isHeadless()) {
+                        desktop.setDisable(true);
+                        lock.setDisable(true);
+                        chat.setDisable(true);
+                    }
+                    row.removeEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, this);
+                }
+            }
+        };
+
+        row.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, handler);
 
         contextMenu.getItems().addAll(monitoring, interaction, manageClient);
 

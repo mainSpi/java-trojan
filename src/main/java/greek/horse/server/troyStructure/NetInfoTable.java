@@ -21,6 +21,8 @@ public class NetInfoTable {
     private final SimpleStringProperty isp;
     private final SimpleStringProperty os;
     private final SimpleStringProperty bigOs;
+    private final SimpleStringProperty headlessText;
+    private final boolean headless;
     private final TroyPlebe father;
 
     public NetInfoTable(NetInfo netInfo, TroyPlebe father) {
@@ -32,6 +34,8 @@ public class NetInfoTable {
         this.isp = new SimpleStringProperty(netInfo.getIsp());
         this.os = new SimpleStringProperty(netInfo.getOs().toString());
         this.bigOs = new SimpleStringProperty(netInfo.getBigOs());
+        this.headlessText = new SimpleStringProperty(netInfo.isHeadless()?"Yes":"No");
+        this.headless = netInfo.isHeadless();
         this.father = father;
 
         String countryName = netInfo.getCountry().toLowerCase(Locale.ROOT);
@@ -106,6 +110,18 @@ public class NetInfoTable {
 
     public String getBigOs() {
         return bigOs.get();
+    }
+
+    public boolean isHeadless() {
+        return headless;
+    }
+
+    public String getHeadlessText() {
+        return headlessText.get();
+    }
+
+    public SimpleStringProperty headlessTextProperty() {
+        return headlessText;
     }
 
     public SimpleStringProperty bigOsProperty() {
