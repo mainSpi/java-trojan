@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="421.0" minWidth="664.0" prefHeight="421.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" onMousePressed="#mousePressed" onMouseReleased="#MouseReleased" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
+            <viewport>
+                <Rectangle2D />
+            </viewport>
+        </ImageView>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="93.0">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <Text fx:id="statusCircleText" boundsType="VISUAL" strokeType="OUTSIDE" strokeWidth="0.0" text="●" textOrigin="CENTER" wrappingWidth="24.76416015625">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="fpsText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FPS" textAlignment="RIGHT" wrappingWidth="27.984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

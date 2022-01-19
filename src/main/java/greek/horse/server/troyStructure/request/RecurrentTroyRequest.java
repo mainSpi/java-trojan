@@ -1,6 +1,6 @@
 package greek.horse.server.troyStructure.request;
 
-import greek.horse.models.RequestFunction;
+import greek.horse.models.RequestFunctionType;
 import greek.horse.models.FunctionTicket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +17,7 @@ public class RecurrentTroyRequest implements TroyRequest {
 
     private final AtomicBoolean sent = new AtomicBoolean(false);
 
-    public RecurrentTroyRequest(Object sendObj, RequestFunction f) {
+    public RecurrentTroyRequest(Object sendObj, RequestFunctionType f) {
         this.sendObj = sendObj;
         this.ticket = new FunctionTicket(f, String.valueOf(System.currentTimeMillis()) + sendObj.hashCode(), true);
     }

@@ -9,9 +9,11 @@ import greek.horse.server.ui.controllers.MonitorDesktopController;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
@@ -58,6 +60,14 @@ public class MonitorDesktopTask implements Runnable {
                 controller = loader.getController();
                 controller.setStage(stage);
                 controller.setTask(this);
+
+                EventHandler<MouseEvent> event = mouseEvent -> {
+                    if (running.get()) {
+                        refreshSettings();
+                    }
+                };
+                scene.setOnMouseEntered(event);
+                scene.setOnMouseExited(event);
 
                 stage.show();
 
@@ -158,7 +168,7 @@ public class MonitorDesktopTask implements Runnable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refreshSettings();
+//                refreshSettings();
                 Platform.runLater(() -> {
                     controller.setFpsText((int) (frameCount.get() / Math.floorDiv(System.currentTimeMillis() - initTime, 1000)));
                 });

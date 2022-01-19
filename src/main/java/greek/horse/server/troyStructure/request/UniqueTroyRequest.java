@@ -1,6 +1,6 @@
 package greek.horse.server.troyStructure.request;
 
-import greek.horse.models.RequestFunction;
+import greek.horse.models.RequestFunctionType;
 import greek.horse.models.FunctionTicket;
 import greek.horse.server.troyStructure.TroyPlebe;
 import org.apache.log4j.Logger;
@@ -18,7 +18,7 @@ public class UniqueTroyRequest implements TroyRequest {
     private final boolean haveResponse;
     private static final Logger log = Logger.getLogger(UniqueTroyRequest.class);
 
-    public UniqueTroyRequest(TroyPlebe father, Object sendObj, RequestFunction f, boolean haveResponse) {
+    public UniqueTroyRequest(TroyPlebe father, Object sendObj, RequestFunctionType f, boolean haveResponse) {
         this.father = father;
         this.sendObj = sendObj;
         this.ticket = new FunctionTicket(f, String.valueOf(System.currentTimeMillis()) + sendObj.hashCode(), false);

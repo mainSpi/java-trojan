@@ -1,7 +1,6 @@
 package greek.horse.server.ui.controllers;
 
 import greek.horse.models.NetInfo;
-import greek.horse.models.OS;
 import greek.horse.server.troyStructure.NetInfoTable;
 import greek.horse.server.troyStructure.TroyPlebe;
 import greek.horse.server.troyStructure.TroyServer;

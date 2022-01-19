@@ -6,10 +6,9 @@ public class MonitorDesktopWrapper implements Serializable {
     private final double width;
     private final double height;
     private final boolean compressed;
-    private int monitor;
+    private final int monitor;
 
     public MonitorDesktopWrapper(double w, double Height, boolean compressed, int monitor) {
-
         this.width = w;
         this.height = Height;
         this.compressed = compressed;

@@ -147,7 +147,7 @@ public class ClientSocketManager {
     private Object answerTicket(FunctionTicket ticket, Object o) {
         try {
 
-            RequestFunction f = ticket.getFunction();
+            RequestFunctionType f = ticket.getFunction();
 
             switch (f) {
                 case NET_INFO:
