@@ -1,5 +1,5 @@
 # Java Trojan
-Fully Java powered trojan. Monitoring and communication software.
+Fully Java-powered trojan. Monitoring and communication software.
 
 ## Disclaimer
 This project is for education purposes **ONLY**. If you are looking for spyware software, this is not it. Any other non-education use is disapproved.
