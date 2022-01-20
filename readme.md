@@ -27,6 +27,11 @@ Check the lastest build [here](/releases/latest)
 - Sending mouse clicks and keyboard keys
 - FPS counter
 
+### Webcam
+![desktop](demo/webcam.png)
+- Webcam selection
+- FPS counter
+
 ### File Browsing
 ![files](demo/files.png)
 - File extension icons
