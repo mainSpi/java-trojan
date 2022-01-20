@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="421.0" minWidth="664.0" prefHeight="421.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="421.0" minWidth="664.0" prefHeight="421.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="greek.horse.server.ui.controllers.WebcamController">
     <center>
-        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" onMousePressed="#mousePressed" onMouseReleased="#MouseReleased" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
+        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
             <viewport>
                 <Rectangle2D />
             </viewport>
@@ -20,7 +20,7 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="93.0">
+            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="212.0">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>

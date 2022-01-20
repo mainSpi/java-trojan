@@ -30,8 +30,9 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
         MenuItem browseFiles = new MenuItem("Browse files", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("fileBrowser", 0.07), null)));
         MenuItem terminal = new MenuItem("Terminal", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("terminal", 0.07), null)));
         MenuItem data = new MenuItem("Full data", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("data", 0.07), null)));
+        MenuItem webcam = new MenuItem("Webcam", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("webcam", 0.07), null)));
         Menu monitoring = new Menu("Monitoring", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("monitoring", 0.07), null)));
-        monitoring.getItems().addAll(desktop, browseFiles, terminal, data);
+        monitoring.getItems().addAll(desktop, webcam, browseFiles, terminal, data);
 
 
         MenuItem chat = new MenuItem("Chat", new ImageView(SwingFXUtils.toFXImage(ChatApp.getImage("chat", 0.07), null)));
@@ -82,6 +83,10 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
             this.controller.contextFullData(row);
         });
 
+        webcam.setOnAction(event ->{
+            this.controller.contextWebcam(row);
+        });
+
         // sort of one time event
         EventHandler<ContextMenuEvent> handler = new EventHandler<>() {
             @Override
@@ -92,6 +97,7 @@ public class HorseRowFactory implements Callback<TableView<NetInfoTable>, TableR
                         desktop.setDisable(true);
                         lock.setDisable(true);
                         chat.setDisable(true);
+                        webcam.setDisable(true);
                     }
                     row.removeEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, this);
                 }

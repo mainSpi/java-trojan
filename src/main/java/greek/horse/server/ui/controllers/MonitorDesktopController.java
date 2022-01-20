@@ -30,7 +30,6 @@ public class MonitorDesktopController {
     public Text fpsText;
     public ChoiceBox<String> choiceBox;
     public Text statusCircleText;
-    private Stage stage;
 
     private final CopyOnWriteArrayList<UserInput> clicksInputs = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<UserInput> keysInputs = new CopyOnWriteArrayList<>();
@@ -45,8 +44,7 @@ public class MonitorDesktopController {
         return map;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void startListeners(Stage stage) {
         stage.getScene().setOnKeyPressed(e -> {
             if (stage.isShowing() && isSendingKeys()) {
                 UserInput press = new UserInput(e.getCode().getCode(), Mode.KEY_PRESSED);
@@ -76,26 +74,10 @@ public class MonitorDesktopController {
                 });
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     public void setImage(BufferedImage screenCapture) {
         imageView.setFitWidth(screenCapture.getWidth());
         imageView.setFitHeight(screenCapture.getHeight());
         imageView.setImage(SwingFXUtils.toFXImage(screenCapture, null));
-    }
-
-    public boolean isCompressed() {
-        return compressionCheck.isSelected();
-    }
-
-    public boolean isSendingKeys() {
-        return keysCheck.isSelected();
-    }
-
-    public boolean isSendingClicks() {
-        return clicksCheck.isSelected();
     }
 
     private int getButton(MouseButton button) {
@@ -138,15 +120,7 @@ public class MonitorDesktopController {
         }
     }
 
-    public void setTask(MonitorDesktopTask monitorDesktopTask) {
-        this.task = monitorDesktopTask;
-    }
-
-    public void toggleImageCompression(ActionEvent event) {
-        this.task.refreshSettings();
-    }
-
-    public void setFpsText(int fps) {
+    public void setFpsText(double fps) {
         if (fps>=4){
             statusCircleText.setFill(Color.rgb(0,150,0));
         } else if (fps==3){
@@ -155,6 +129,25 @@ public class MonitorDesktopController {
             statusCircleText.setFill(Color.rgb(200,0,0));
 
         }
-        this.fpsText.setText(String.valueOf(fps));
+        this.fpsText.setText(String.format("%.2f", fps).replace(",", "."));
+    }
+
+    public void toggleImageCompression(ActionEvent event) {
+        this.task.refreshSettings();
+    }
+
+    public void setTask(MonitorDesktopTask monitorDesktopTask) {
+        this.task = monitorDesktopTask;
+    }
+    public boolean isCompressed() {
+        return compressionCheck.isSelected();
+    }
+
+    public boolean isSendingKeys() {
+        return keysCheck.isSelected();
+    }
+
+    public boolean isSendingClicks() {
+        return clicksCheck.isSelected();
     }
 }

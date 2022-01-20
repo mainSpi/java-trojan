@@ -22,7 +22,7 @@ public class DesktopTask implements Runnable {
     private FunctionTicket ticket;
     private final AtomicReference<MonitorDesktopWrapper> info = new AtomicReference<>();
     private double lastScale;
-    private static final int interval = 200;
+    private static final int interval = 100;
 
     private static final Logger log = Logger.getLogger(DesktopTask.class);
     private Rectangle lastRect;
@@ -57,8 +57,7 @@ public class DesktopTask implements Runnable {
                         client.getOos().getAcquire().flush();
 
                     } catch (Exception e) {
-//                        e.printStackTrace();
-                        log.error(e);
+                        log.error("Error capturing screen",e);
                     }
                 }
 
@@ -129,9 +128,5 @@ public class DesktopTask implements Runnable {
 
     public void setInfo(MonitorDesktopWrapper info) {
         this.info.lazySet(info);
-    }
-
-    public double getLastScale() {
-        return lastScale;
     }
 }
