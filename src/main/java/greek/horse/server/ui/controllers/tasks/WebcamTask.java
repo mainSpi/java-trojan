@@ -80,8 +80,6 @@ public class WebcamTask implements Runnable {
             }
         });
 
-        loadWebcams();
-
         while (!start.get()) {
             try {
                 Thread.sleep(100);
@@ -89,6 +87,8 @@ public class WebcamTask implements Runnable {
                 e.printStackTrace();
             }
         }
+
+        loadWebcams();
 
         startListening();
 
@@ -115,14 +115,6 @@ public class WebcamTask implements Runnable {
     private void startListening() {
         double w = stage.getWidth() - 50;
         double h = stage.getHeight() - 70;
-
-        while(controller.choiceBox.getItems().isEmpty()){
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 
         request = plebe.startWebcam(new WebcamInfoWrapper(w, h, controller.choiceBox.getSelectionModel().getSelectedItem()));
 
@@ -171,10 +163,19 @@ public class WebcamTask implements Runnable {
             } catch (Exception e) {
                 log.error("Failed to get webcams", e);
                 this.running.set(false);
-            } finally {
+            }
+            finally {
                 controller.configureChoiceBox();
             }
         });
+
+        while (controller.choiceBox.getSelectionModel().getSelectedItem() == null){
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -183,6 +184,9 @@ public class WebcamTask implements Runnable {
     }
 
     public void refreshSettings(int index) {
+        if (index<0){
+            return;
+        }
         double w = stage.getWidth() - 50;
         double h = stage.getHeight() - 70;
         this.plebe.refreshWebcam(new WebcamInfoWrapper(w, h, controller.choiceBox.getItems().get(index)));

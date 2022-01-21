@@ -79,8 +79,6 @@ public class MonitorDesktopTask implements Runnable {
             }
         });
 
-        loadMonitors();
-
         while (!start.get()) {
             try {
                 Thread.sleep(100);
@@ -88,6 +86,8 @@ public class MonitorDesktopTask implements Runnable {
                 e.printStackTrace();
             }
         }
+
+        loadMonitors();
 
         startListening();
 
@@ -129,19 +129,19 @@ public class MonitorDesktopTask implements Runnable {
             }
         });
 
-    }
-
-    private void startListening() {
-        double w = stage.getWidth() - 50;
-        double h = stage.getHeight() - 70;
-
-        while(controller.choiceBox.getItems().isEmpty()){
+        while (controller.choiceBox.getSelectionModel().getSelectedItem() == null){
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+    }
+
+    private void startListening() {
+        double w = stage.getWidth() - 50;
+        double h = stage.getHeight() - 70;
 
         request = plebe.startDesktop(new MonitorDesktopWrapper(w, h, controller.isCompressed(), 0));
 
@@ -191,9 +191,13 @@ public class MonitorDesktopTask implements Runnable {
     }
 
     public void refreshSettings() {
+        int index = controller.choiceBox.getSelectionModel().getSelectedIndex();
+        if (index<0){
+            return;
+        }
         double w = stage.getWidth() - 50;
         double h = stage.getHeight() - 70;
-        this.plebe.refreshDesktop(new MonitorDesktopWrapper(w, h, controller.isCompressed(), controller.choiceBox.getSelectionModel().getSelectedIndex()));
+        this.plebe.refreshDesktop(new MonitorDesktopWrapper(w, h, controller.isCompressed(), index));
     }
 
     public AtomicBoolean getRunning() {

@@ -20,12 +20,12 @@ public class WebcamController {
 
     public void configureChoiceBox() {
         choiceBox.getSelectionModel().selectFirst();
-        choiceBox.getSelectionModel().selectedIndexProperty()
-                .addListener((observableValue, oldIndex, newIndex) -> {
-                    if (oldIndex.intValue() != newIndex.intValue()) {
-                        task.refreshSettings(newIndex.intValue());
-                    }
-                });
+//        choiceBox.getSelectionModel().selectedIndexProperty()
+//                .addListener((observableValue, oldIndex, newIndex) -> {
+//                    if (oldIndex.intValue() != newIndex.intValue()) {
+//                        task.refreshSettings(newIndex.intValue());
+//                    }
+//                });
     }
 
     public void setImage(BufferedImage screenCapture) {
